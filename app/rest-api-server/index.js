@@ -3,8 +3,9 @@
  *******************************/
 var express = require('express');
 var aggregateRoutes = require('./route-aggregator');
-var auth = require('./auth');
+var authHandler = require('./auth-handler');
 var path = require('path');
+var bodyParser = require('body-parser');
 
 /*******************************
  *    The Meat?
@@ -22,7 +23,10 @@ module.exports = class {
         app.use('/', express.static(path.join(__dirname, 'static')));
 
         // Add authentication middleware
-        app.use(auth);
+        app.use(authHandler.authenticate);
+
+        // parse application/json
+        app.use(bodyParser.json())
 
         // Assign API Routes...
         aggregateRoutes().forEach(route => {
