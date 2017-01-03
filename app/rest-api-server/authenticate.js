@@ -2,21 +2,18 @@
 var admin = require("firebase-admin");
 var serviceAccount = require("C:/keys/nomnomnotebook-firebase-adminsdk-uiiy9-e861d48d8a.json");
 
-var user = null;
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://nomnomnotebook.firebaseio.com"
-});
+(function test5() {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://nomnomnotebook.firebaseio.com"
+    });
+    console.log("Firebase app initialized");
+})();
 
 function parseToken(authHeader) {
     if (/^Bearer ([^\s\.]+\.){2}[^\s\.]+$/.test(authHeader)) {
         return authHeader.replace(/^Bearer /, '');
     }
-}
-
-function getUser() {
-    return user;
 }
 
 function authenticate(req, res, next) {
@@ -31,7 +28,8 @@ function authenticate(req, res, next) {
         .auth()
         .verifyIdToken(parseToken(req.headers.authorization))
         .then(decodedToken => {
-            user = decodedToken;
+            //user = decodedToken;
+            req.firebaseUser = decodedToken;
             next();
         })
         .catch(error => {
@@ -44,8 +42,5 @@ function authenticate(req, res, next) {
 
 
 
-module.exports = {
-    authenticate: authenticate,
-    getUser: getUser
-};
+module.exports = authenticate;
 

@@ -3,7 +3,7 @@
  *******************************/
 var express = require('express');
 var aggregateRoutes = require('./route-aggregator');
-var authHandler = require('./auth-handler');
+var authenticate = require('./authenticate');
 var path = require('path');
 var bodyParser = require('body-parser');
 
@@ -23,7 +23,7 @@ module.exports = class {
         app.use('/', express.static(path.join(__dirname, 'static')));
 
         // Add authentication middleware
-        app.use(authHandler.authenticate);
+        app.use(authenticate);
 
         // parse application/json
         app.use(bodyParser.json())

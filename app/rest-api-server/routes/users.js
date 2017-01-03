@@ -3,7 +3,6 @@
  *******************************/
 var express = require('express');
 var Response = require('../models/response');
-var authHandler = require('../auth-handler');
 
 /*******************************
  *    Handlers
@@ -11,15 +10,15 @@ var authHandler = require('../auth-handler');
 var router = express.Router();
 
 router
-    .get('/:id', (req, res) => {
+    .get('/:userid', (req, res) => {
         res.json(new Response({
-            id: req.params.id,
+            id: req.params.userid,
             displayName: "Joe Smith",
             email: "elrod.development@gmail.com"
         }));
     })
     .post('/', (req, res) => {
-        var user = authHandler.getUser();
+        
 
 
     });
