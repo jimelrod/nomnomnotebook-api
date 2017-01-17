@@ -1,8 +1,7 @@
 /*******************************
  *    Imports...
  *******************************/
-const path = require('path');
-const Server = require(path.join(__dirname, 'app', 'rest-api-server')); // Maybe shouldn't be const? I dunno...
+var Server = require('./app/rest-api-server');
 
 /*******************************
  *    The Meat?

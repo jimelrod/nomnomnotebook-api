@@ -13,28 +13,29 @@ var bodyParser = require('body-parser');
 module.exports = class {
     constructor(config) {
         // TODO: Figure out config...
-        console.log("Server module built...");
+
+        this.port = 3000;
     }
 
     start() {
         var app = express();
 
-        // Set static route
+        // Set route for serving static files
         app.use('/', express.static(path.join(__dirname, 'static')));
 
         // Add authentication middleware
         app.use(authenticate);
 
-        // parse application/json
-        app.use(bodyParser.json())
+        // Easy parsing of message body in http requests
+        // Only accept application/json
+        app.use(bodyParser.json());
 
         // Assign API Routes...
-        aggregateRoutes().forEach(route => {
-            app.use(route.endpoint, route.router);
-        });        
+        // See implementation for the magic...
+        aggregateRoutes().forEach(route => app.use(route.endpoint, route.router));
 
-        app.listen(3000, () => {
-            console.log('Example app listening on port 3000!');
+        app.listen(this.port, () => {
+            console.log(`Api started on port ${this.port}`);
         });
     }
 };

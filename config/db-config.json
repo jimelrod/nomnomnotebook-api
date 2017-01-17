@@ -1,0 +1,10 @@
+{
+    "userName": "sa2",
+    "password": "unclejim32",
+    "server": "DESKTOP-STNOHJO",
+    "options": {
+        "database": "NomNomNotebook",
+        "useColumnNames": true,
+        "camelCaseColumns": true
+    }
+}
