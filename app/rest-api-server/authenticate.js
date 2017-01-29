@@ -1,11 +1,12 @@
 // TODO: Get shit from config...
 var admin = require("firebase-admin");
-var serviceAccount = require("C:/keys/nomnomnotebook-firebase-adminsdk-uiiy9-e861d48d8a.json");
+var firebaseConfig = require("../../config/firebase.json");
+var serviceAccount = require(firebaseConfig.keyFile);
 
 (function test5() {
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://nomnomnotebook.firebaseio.com"
+        databaseURL: firebaseConfig.databaseURL
     });
     console.log("Firebase app initialized");
 })();

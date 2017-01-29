@@ -29,5 +29,7 @@ module.exports = () => {
             });
         });
 
+    console.log(JSON.stringify(routes));
+
     return routes;
 };
